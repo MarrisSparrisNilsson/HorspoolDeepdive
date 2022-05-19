@@ -23,7 +23,9 @@ int main(int argc, char const *argv[]) {
     // // ---------------------------
 
     char string[STRING_SIZE], queryString[STRING_SIZE];
-    int option;
+    int option, test;
+
+    int bFOP = 0, hOP = 0; // Critical operation counters for both algorithms
 
     // char asciiTable[128];
     while (1) {
@@ -48,7 +50,7 @@ int main(int argc, char const *argv[]) {
                     
                 break;
             case 2: // Horsppol
-                    int matchIndex = horspoolMatching(queryString, string);
+                    int matchIndex = horspoolMatching(queryString, string, &hOP);
                     if (matchIndex == -1) printf("** Pattern %s could not be found in %s **\n", queryString, string);
                     else printf("\n-- The pattern %s was found at index %d of %s --\n", queryString, matchIndex, string);
                 break;
@@ -69,19 +71,19 @@ void displayMenu() {
     );
 }
 
-int bruteForceStrMatching() {
+// int bruteForceMatching() {
 
-    // while (/* i + queryString_size < string_size */) {
+//     while (/* i + queryString_size < string_size */) {
 
-    //     if (/* i + queryString_size > string_size*/) {
-    //         return 0; // Match not found
-    //     }
-    // }
-    // if (/* found */) {
-    //     return 1;
-    // }
-    // else return 0;
-}
+//         if (/* i + queryString_size > string_size*/) {
+//             return 0; // Match not found
+//         }
+//     }
+//     if (/* found */) {
+//         return 1;
+//     }
+//     else return 0;
+// }
 
 void displayTableMatches(char string[], char queryString[], int tShift) {
     printf("\n%s\n", string);
@@ -116,7 +118,7 @@ void shiftTable(int *table, char queryString[]) {
 }
 
 
-int horspoolMatching(char queryString[], char string[]) {
+int horspoolMatching(char queryString[], char string[], size_t *hOP) {
 
     // Implements Horspool’s algorithm for string matching
     // Input: Pattern P[0..m − 1] and text T [0..n − 1]
@@ -134,8 +136,10 @@ int horspoolMatching(char queryString[], char string[]) {
     printf("%s\n", queryString);
     while (i <= n - 1) {
         k = 0; // number of matched characters
+        (*hOP)++;
         while (k <= m - 1 && queryString[m - 1 - k] == string[i - k]) {
             k = k + 1;
+            (*hOP)++;
         }
         if (k == m)
             return i - m + 1;
