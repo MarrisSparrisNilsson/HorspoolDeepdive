@@ -1,5 +1,7 @@
 #include "algorithm.h"
 
+static void displayStringComps(char string[], char pattern[], int tShift);
+
 int bruteForceMatching(char pattern[], char string[], size_t *bFOP) {
 
     int patternLen = strlen(pattern);
@@ -80,10 +82,19 @@ int horspoolMatching(char pattern[], char string[], size_t *hOP) {
             (*hOP)++;
         }
         if (k == m)
-            return i - m + 1;
+            return i - m + 1; // Index where a match was found
         else i += table[string[i]];
         
-        displayTableMatches(string, pattern, i);
+        displayStringComps(string, pattern, i);
     }
     return -1;
+}
+
+static void displayStringComps(char string[], char pattern[], int tShift) {
+    printf("\n%s\n", string);
+    int m = strlen(pattern);
+    for (size_t i = 0; i < tShift - m + 1; i++) {
+        printf(" ");
+    }
+    printf("%s\n", pattern);
 }

@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "filehandling.h"
+#include "algorithm.h"
 
-#define STRING_SIZE 20
+#define STRING_SIZE 50
 
-void displayTableMatches(char string[], char pattern[], int tShift);
-
-void displayMenu();
+static void displayMenu();
+static void displayTestOptions();
 
 int main(int argc, char const *argv[]) {
 
@@ -45,18 +46,22 @@ int main(int argc, char const *argv[]) {
         scanf("%d", &option);
 
         switch (option) {
-            case 1: // Brute-force
-                    matchIndex = bruteForceMatching(pattern, string, &bFOP);
-                    if (matchIndex == -1) printf("** Pattern %s could not be found in %s **\n", pattern, string);
-                    else printf("\n-- The pattern %s was found at index %d of %s --\n", pattern, matchIndex, string);
-                    
-                break;
-            case 2: // Horsppol
-                    matchIndex = horspoolMatching(pattern, string, &hOP);
-                    if (matchIndex == -1) printf("** Pattern %s could not be found in %s **\n", pattern, string);
-                    else printf("\n-- The pattern %s was found at index %d of %s --\n", pattern, matchIndex, string);
-                break;
-            case -1: exit(-1); break;
+            case 1:
+                // Brute-force
+                printHeader(string, pattern);
+                matchIndex = bruteForceMatching(pattern, string, &bFOP);
+                if (matchIndex == -1) printf("** Pattern %s could not be found in %s **\n", pattern, string);
+                else printf("\n-- The pattern %s was found at index %d of %s --\n", pattern, matchIndex, string);
+                
+                // Horsppol
+                matchIndex = horspoolMatching(pattern, string, &hOP);
+                if (matchIndex == -1) printf("** Pattern %s could not be found in %s **\n", pattern, string);
+                else printf("\n-- The pattern %s was found at index %d of %s --\n", pattern, matchIndex, string);
+
+                writeResultToFile(bFOP, hOP);
+
+            break;
+            case 0: exit(-1); break;
             default: puts("Invalid input, please try again."); break;
         }
     }
@@ -64,22 +69,20 @@ int main(int argc, char const *argv[]) {
     return 0;
 }
 
-void displayMenu() {
+static void displayMenu() {
     printf(
-        "\nChoose algorithm:\n"
-        "1: Brute-force\n"
-        "2: Horspools\n"
-        "-1: Exit\n"
+        "\nChoose option:\n"
+        "1: Run Horspool test\n"
+        "0: Exit\n"
     );
 }
 
-void displayTableMatches(char string[], char pattern[], int tShift) {
-    printf("\n%s\n", string);
-    int m = strlen(pattern);
-    for (size_t i = 0; i < tShift - m + 1; i++) {
-        printf(" ");
-    }
-    printf("%s\n", pattern);
+static void displayTestOptions() {
+    printf(
+        "\nChoose test:\n"
+        "1: Horspool - pool\n"
+        "2: \n"
+    );
 }
 
 // Pattern : pattern

@@ -2,6 +2,8 @@
 #define ALGORITHM_H_
 
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 #define ASCII_SIZE 128
 
