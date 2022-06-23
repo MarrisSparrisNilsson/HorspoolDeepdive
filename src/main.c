@@ -7,7 +7,6 @@
 #define STRING_SIZE 50
 
 static void displayMenu();
-static void displayTestOptions();
 
 int main(int argc, char const *argv[]) {
 
@@ -71,17 +70,16 @@ int main(int argc, char const *argv[]) {
 
 static void displayMenu() {
     printf(
-        "\nChoose option:\n"
-        "1: Run Horspool test\n"
-        "0: Exit\n"
-    );
-}
-
-static void displayTestOptions() {
-    printf(
+        // KOM PÅ TEST MED SAMMA STRÄNG MEN OLIKA LÄNGD PÅ PATTERN!
         "\nChoose test:\n"
         "1: Horspool - pool\n"
-        "2: \n"
+        "2: 1010100111 - 100\n" // LITE VARIATION, KORT
+        "3: 100011110110101101010011011101 - 00110\n" // LITE VARIATION, LÅNGT
+        "4: ETKMINSUVWXOOTM - VWX\n" // VARIATION, KORT
+        "5: ABCDEFGHIJKLMNOPQRSTUVWXYZ - VWX\n" // VARIATION, LÅNGT
+        "6: ALKSDJIFEBEOIHSAWQNOIJASFH - HELLO\n" // INGEN MATCHNING
+        "7: Custom Choice\n"
+        "0: Exit\n"
     );
 }
 
