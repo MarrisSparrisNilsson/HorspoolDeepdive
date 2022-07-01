@@ -25,9 +25,8 @@ int bruteForceMatching(char pattern[], char string[], size_t *bFOP) {
             k++;
         }
         
-        if (matchingChar == patternLen) {
+        if (matchingChar == patternLen)
             return i;
-        }
         else i++;
         printf("\n%s\n", string);
         for (size_t c = 0; c < i; c++) {

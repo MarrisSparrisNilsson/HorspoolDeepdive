@@ -28,41 +28,86 @@ int main(int argc, char const *argv[]) {
 
     // char asciiTable[128];
     while (1) {
-        
-        fflush(stdin);
-        printf("\nEnter a string: ");
-        scanf("%s", string);
-
         // 101010101110111010011
         // 1010111011
-
-        printf("Enter a pattern to search for: ");
-        scanf("%s", pattern);
-
+        
         displayMenu();
 
-        printf("Select algorithm: ");
+        fflush(stdin);
+        printf("Select test option: ");
         scanf("%d", &option);
 
         switch (option) {
+
+            // "1: Horspool - pool\n"
+            // "2: 1010100111 - 100\n" // LITE VARIATION, KORT
+            // "3: 100011110110101101010011011101 - 00110\n" // LITE VARIATION, LÅNGT
+            // "4: ETKMINSUVWXOOTM - VWX\n" // VARIATION, KORT
+            // "5: ABCDEFGHIJKLMNOPQRSTUVWXYZ - VWX\n" // VARIATION, LÅNGT
+            // "6: ALKSDJIFEBEOIHSAWQNOIJASFH - HELLO\n" // INGEN MATCHNING
             case 1:
-                // Brute-force
-                printHeader(string, pattern);
-                matchIndex = bruteForceMatching(pattern, string, &bFOP);
-                if (matchIndex == -1) printf("** Pattern %s could not be found in %s **\n", pattern, string);
-                else printf("\n-- The pattern %s was found at index %d of %s --\n", pattern, matchIndex, string);
-                
-                // Horsppol
-                matchIndex = horspoolMatching(pattern, string, &hOP);
-                if (matchIndex == -1) printf("** Pattern %s could not be found in %s **\n", pattern, string);
-                else printf("\n-- The pattern %s was found at index %d of %s --\n", pattern, matchIndex, string);
+                strcpy(string, "Horspool");
+                strcpy(pattern, "pool");
+            break;
+            case 2:
+                strcpy(string, "1010100111");
+                strcpy(pattern, "100");
+            break;
+            case 3:
+                strcpy(string, "100011110110101101010011011101");
+                strcpy(pattern, "00110");
+            break;
+            case 4:
+                strcpy(string, "ETKMINSUVWXOOTM");
+                strcpy(pattern, "VWX");
+            break;
+            case 5:
+                strcpy(string, "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                strcpy(pattern, "VWX");
+            break;
+            case 6:
+                strcpy(string, "ALKSDJIFEBEOIHSAWQNOIJASFH");
+                strcpy(pattern, "HELLO");
+            break;
+            case 7:
+                strcpy(string, "GEORGE_HAS_A_YELLOW_HAT");
+                strcpy(pattern, "YELLOW");
+            break;
+            case 8:
+                strcpy(string, "11111111111111111101");
+                strcpy(pattern, "0");
+            break;
+            case 15: 
+                printf("\nEnter a string: ");
+                scanf("%s", string);
 
-                writeResultToFile(bFOP, hOP);
-
+                printf("Enter a pattern to search for: ");
+                scanf("%s", pattern);
             break;
             case 0: exit(-1); break;
             default: puts("Invalid input, please try again."); break;
         }
+        printHeader(string, pattern);
+        printf(
+            "\nBrute-force:"
+            "\n---------------------"
+        );
+        matchIndex = bruteForceMatching(pattern, string, &bFOP);
+        // if (matchIndex == -1) printf("** Pattern %s could not be found in %s **\n", pattern, string);
+        // else printf("\n-- The pattern %s was found at index %d of %s --\n", pattern, matchIndex, string);
+        puts("---------------------");
+        
+        // Horspool
+         printf(
+            "\nHorspool:"
+            "\n---------------------"
+        );
+        horspoolMatching(pattern, string, &hOP);
+        puts("---------------------");
+        if (matchIndex == -1) printf("** Pattern %s could not be found in %s **\n", pattern, string);
+        else printf("\n-- The pattern %s was found at index %d of %s --\n", pattern, matchIndex, string);
+
+        writeResultToFile(bFOP, hOP);
     }
 
     return 0;
@@ -78,7 +123,9 @@ static void displayMenu() {
         "4: ETKMINSUVWXOOTM - VWX\n" // VARIATION, KORT
         "5: ABCDEFGHIJKLMNOPQRSTUVWXYZ - VWX\n" // VARIATION, LÅNGT
         "6: ALKSDJIFEBEOIHSAWQNOIJASFH - HELLO\n" // INGEN MATCHNING
-        "7: Custom Choice\n"
+        "7: GEORGE_HAS_A_YELLOW_HAT - YELLOW\n"
+        "8: 11111111111111111101 - 0\n"
+        "15: Custom Choice\n"
         "0: Exit\n"
     );
 }

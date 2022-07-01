@@ -23,9 +23,11 @@ void writeResultToFile(size_t bFOP, size_t hOP) {
     FILE *fPtr = fopen("data/result.txt", "a");
 
     fprintf(fPtr,
-        "\nBrute-force: %d\n"
-        "Horspool: %d\n"
-        "--------------------\n",
+        "\nCritical operations:\n"
+        "Brute-force: %d\n"
+        "Horspool: %d\n\n"
+        "==================================\n"
+        "==================================\n\n",
         bFOP, hOP
     );
 

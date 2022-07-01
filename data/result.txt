@@ -1,0 +1,82 @@
+String: Horspool
+Pattern: pool
+
+Critical operations:
+Brute-force: 26
+Horspool: 6
+
+==================================
+==================================
+
+String: 1010100111
+Pattern: 100
+
+Critical operations:
+Brute-force: 47
+Horspool: 12
+
+==================================
+==================================
+
+String: 100011110110101101010011011101
+Pattern: 00110
+
+Critical operations:
+Brute-force: 174
+Horspool: 43
+
+==================================
+==================================
+
+String: ETKMINSUVWXOOTM
+Pattern: VWX
+
+Critical operations:
+Brute-force: 211
+Horspool: 50
+
+==================================
+==================================
+
+String: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Pattern: VWX
+
+Critical operations:
+Brute-force: 300
+Horspool: 61
+
+==================================
+==================================
+
+String: ALKSDJIFEBEOIHSAWQNOIJASFH
+Pattern: HELLO
+
+Critical operations:
+Brute-force: 457
+Horspool: 67
+
+==================================
+==================================
+
+String: GEORGE_HAS_A_YELLOW_HAT
+Pattern: YELLOW
+
+Critical operations:
+Brute-force: 556
+Horspool: 78
+
+==================================
+==================================
+
+String: 11111111111111111101
+Pattern: 101
+
+Critical operations:
+Brute-force: 73
+Horspool: 21
+
+==================================
+==================================
+
+String: 11111111111111111101
+Pattern: 0
