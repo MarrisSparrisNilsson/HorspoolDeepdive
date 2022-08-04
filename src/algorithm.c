@@ -9,7 +9,7 @@ int bruteForceMatching(char pattern[], char string[], size_t *bFOP) {
     int matchingChar;
 
     int i = 0;
-    (*bFOP)++;
+    // (*bFOP)++;
     printf("\n%s\n", string);
     printf("%s\n", pattern);
     while (i < stringLen) { // Loop until it reaches the end of the string
@@ -17,10 +17,10 @@ int bruteForceMatching(char pattern[], char string[], size_t *bFOP) {
         int j = i;
         int k = 0;
         (*bFOP)++;
-        while (k < patternLen) {
+        while (k < patternLen && pattern[k] == string[j]) { // Loop pattern characters
+            // if (pattern[k] == string[j])
+            matchingChar++; // Match not found
             (*bFOP)++;
-            if (pattern[k] == string[j])
-                matchingChar++; // Match not found
             j++;
             k++;
         }
@@ -48,14 +48,14 @@ void shiftTable(int *table, char pattern[]) {
     // Output: Table[0..size − 1] indexed by the alphabet’s characters and
     // filled with shift sizes computed by formula (7.1)
     int m = strlen(pattern);
-    // int table[128];
     for (size_t i = 0; i <= ASCII_SIZE - 1; i++)
         table[i] = m;
-    for (size_t j = 0; j <= m - 2; j++)
-        table[(int) pattern[j]] = m - 1 - j;
-    // return table;
+    if (m == 1) // When pattern only constist of one character
+        table[(int) pattern[0]] = 0;
+    else 
+        for (size_t j = 0; j <= m - 2; j++)
+            table[(int) pattern[j]] = m - 1 - j;
 }
-
 
 int horspoolMatching(char pattern[], char string[], size_t *hOP) {
 
@@ -73,14 +73,17 @@ int horspoolMatching(char pattern[], char string[], size_t *hOP) {
     int i = m - 1; // position of the pattern’s right end
     printf("\n%s\n", string);
     printf("%s\n", pattern);
-    while (i <= n - 1) {
+    while (i <= n - 1) { // Loop until it reaches the end of the string
         k = 0; // number of matched characters
         (*hOP)++;
-        while (k <= m - 1 && pattern[m - 1 - k] == string[i - k]) {
+        // Loop pattern characters
+        while (k <= m - 1 && pattern[m - 1 - k] == string[i - k]) { 
             k = k + 1;
             (*hOP)++;
         }
-        if (k == m)
+        // If the number of character matches
+        // is the same as the pattern length
+        if (k == m) 
             return i - m + 1; // Index where a match was found
         else i += table[string[i]];
         

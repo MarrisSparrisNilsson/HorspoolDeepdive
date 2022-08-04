@@ -4,7 +4,7 @@
 #include "filehandling.h"
 #include "algorithm.h"
 
-#define STRING_SIZE 50
+#define STRING_SIZE 30
 
 static void displayMenu();
 
@@ -13,23 +13,17 @@ int main(int argc, char const *argv[]) {
     // String : JIM_SAW_ME_IN_A_BARBERSHOP
     // Pattern : BARBER
 
-    // // ---------- ASCII ----------
-    // printf("\nEnter some number between 1 - 128: ");
-    // fflush(stdin);
-    // scanf("%d", &option);
-    // printf("Character: %c\n", option);
-    // // ---------------------------
-
     char string[STRING_SIZE], pattern[STRING_SIZE];
     int option, test;
 
-    size_t bFOP = 0, hOP = 0; // Critical operation counters for both algorithms
+    size_t bFOP, hOP; // Critical operation counters for both algorithms
     int matchIndex;
 
-    // char asciiTable[128];
     while (1) {
         // 101010101110111010011
         // 1010111011
+
+        bFOP = 0, hOP = 0;
         
         displayMenu();
 
@@ -38,13 +32,6 @@ int main(int argc, char const *argv[]) {
         scanf("%d", &option);
 
         switch (option) {
-
-            // "1: Horspool - pool\n"
-            // "2: 1010100111 - 100\n" // LITE VARIATION, KORT
-            // "3: 100011110110101101010011011101 - 00110\n" // LITE VARIATION, LÅNGT
-            // "4: ETKMINSUVWXOOTM - VWX\n" // VARIATION, KORT
-            // "5: ABCDEFGHIJKLMNOPQRSTUVWXYZ - VWX\n" // VARIATION, LÅNGT
-            // "6: ALKSDJIFEBEOIHSAWQNOIJASFH - HELLO\n" // INGEN MATCHNING
             case 1:
                 strcpy(string, "Horspool");
                 strcpy(pattern, "pool");
@@ -54,7 +41,7 @@ int main(int argc, char const *argv[]) {
                 strcpy(pattern, "100");
             break;
             case 3:
-                strcpy(string, "100011110110101101010011011101");
+                strcpy(string, "10001111011010110101001101110");
                 strcpy(pattern, "00110");
             break;
             case 4:
@@ -77,6 +64,14 @@ int main(int argc, char const *argv[]) {
                 strcpy(string, "11111111111111111101");
                 strcpy(pattern, "0");
             break;
+            case 9:
+                strcpy(string, "11111111111111111101");
+                strcpy(pattern, "01");
+            break;
+            case 10:
+                strcpy(string, "ETKMINSUVWXOOTM");
+                strcpy(pattern, "VWXOOTM");
+            break;
             case 15: 
                 printf("\nEnter a string: ");
                 scanf("%s", string);
@@ -93,8 +88,6 @@ int main(int argc, char const *argv[]) {
             "\n---------------------"
         );
         matchIndex = bruteForceMatching(pattern, string, &bFOP);
-        // if (matchIndex == -1) printf("** Pattern %s could not be found in %s **\n", pattern, string);
-        // else printf("\n-- The pattern %s was found at index %d of %s --\n", pattern, matchIndex, string);
         puts("---------------------");
         
         // Horspool
@@ -125,6 +118,13 @@ static void displayMenu() {
         "6: ALKSDJIFEBEOIHSAWQNOIJASFH - HELLO\n" // INGEN MATCHNING
         "7: GEORGE_HAS_A_YELLOW_HAT - YELLOW\n"
         "8: 11111111111111111101 - 0\n"
+        "9: 11111111111111111101 - 01\n"
+        "10: ETKMINSUVWXOOTM - VMXOOTM\n"
+
+        "10: 11111111111111111101 - 01\n"
+        "11: YELLOW - YELLOW\n"
+        "11: BELLOW - YELLOW\n"
+        "3: 100011110110101101010011011101 - 100011110110101101010011011101\n" // LITE VARIATION, LÅNGT
         "15: Custom Choice\n"
         "0: Exit\n"
     );

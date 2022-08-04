@@ -2,7 +2,7 @@ String: Horspool
 Pattern: pool
 
 Critical operations:
-Brute-force: 26
+Brute-force: 9
 Horspool: 6
 
 ==================================
@@ -12,18 +12,18 @@ String: 1010100111
 Pattern: 100
 
 Critical operations:
-Brute-force: 47
-Horspool: 12
+Brute-force: 12
+Horspool: 6
 
 ==================================
 ==================================
 
-String: 100011110110101101010011011101
+String: 10001111011010110101001101110
 Pattern: 00110
 
 Critical operations:
-Brute-force: 174
-Horspool: 43
+Brute-force: 38
+Horspool: 31
 
 ==================================
 ==================================
@@ -32,8 +32,8 @@ String: ETKMINSUVWXOOTM
 Pattern: VWX
 
 Critical operations:
-Brute-force: 211
-Horspool: 50
+Brute-force: 12
+Horspool: 7
 
 ==================================
 ==================================
@@ -42,8 +42,8 @@ String: ABCDEFGHIJKLMNOPQRSTUVWXYZ
 Pattern: VWX
 
 Critical operations:
-Brute-force: 300
-Horspool: 61
+Brute-force: 25
+Horspool: 11
 
 ==================================
 ==================================
@@ -52,8 +52,8 @@ String: ALKSDJIFEBEOIHSAWQNOIJASFH
 Pattern: HELLO
 
 Critical operations:
-Brute-force: 457
-Horspool: 67
+Brute-force: 28
+Horspool: 6
 
 ==================================
 ==================================
@@ -62,21 +62,49 @@ String: GEORGE_HAS_A_YELLOW_HAT
 Pattern: YELLOW
 
 Critical operations:
-Brute-force: 556
-Horspool: 78
-
-==================================
-==================================
-
-String: 11111111111111111101
-Pattern: 101
-
-Critical operations:
-Brute-force: 73
-Horspool: 21
+Brute-force: 20
+Horspool: 11
 
 ==================================
 ==================================
 
 String: 11111111111111111101
 Pattern: 0
+
+Critical operations:
+Brute-force: 20
+Horspool: 20
+
+==================================
+==================================
+
+String: 11111111111111111101
+Pattern: 01
+
+Critical operations:
+Brute-force: 21
+Horspool: 21
+
+==================================
+==================================
+
+String: ETKMINSUVWXOOTM
+Pattern: VWX
+
+Critical operations:
+Brute-force: 12
+Horspool: 7
+
+==================================
+==================================
+
+String: ETKMINSUVWXOOTM
+Pattern: VWXOOTM
+
+Critical operations:
+Brute-force: 16
+Horspool: 10
+
+==================================
+==================================
+
