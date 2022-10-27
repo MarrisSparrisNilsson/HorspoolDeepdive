@@ -108,3 +108,101 @@ Horspool: 10
 ==================================
 ==================================
 
+String: GEORGE_HAS_A_YELLOW_HAT
+Pattern: YELLOW
+
+Critical operations:
+Brute-force: 20
+Horspool: 11
+
+==================================
+==================================
+
+String: GEORGE_HAS_A_YELLOW_HAT
+Pattern: YELLOW
+
+Critical operations:
+Brute-force: 20
+Horspool: 11
+
+==================================
+==================================
+
+String: A_simple_example_can_demonstrate_that_the_worst-case
+Pattern: ample
+
+Critical operations:
+Brute-force: 17
+Horspool: 13
+
+==================================
+==================================
+
+String: GEORGE_HAS_A_YELLOW_HAT
+Pattern: YELLOW
+String: GEORGE_HAS_A_YELLOW_HAT
+Pattern: YELLOW
+String: Horspool
+Pattern: pool
+
+Critical operations:
+Brute-force: 9
+Horspool: 6
+
+==================================
+==================================
+
+String: Horspool
+Pattern: Horspoop
+
+Critical operations:
+Brute-force: 15
+Horspool: 1
+
+==================================
+==================================
+
+String: Horspool
+Pattern: Horspoop
+
+Critical operations:
+Brute-force: 0
+Horspool: 1
+
+==================================
+==================================
+
+String: GEORGE_HAS_A_YELLOW_HAT
+Pattern: YELLOW
+
+Critical operations:
+Brute-force: 20
+Horspool: 3
+
+==================================
+==================================
+
+String: A_simple_example_can_demonstrate_that_the_worst-case
+Pattern: ample
+
+Critical operations:
+Brute-force: 17
+Horspool: 13
+
+==================================
+==================================
+
+String: 1010100111
+Pattern: 100
+
+Critical operations:
+Brute-force: 12
+Horspool: 6
+
+==================================
+==================================
+
+String: GEORGE_HAS_A_YELLOW_HAT
+Pattern: YELLOW
+String: 1010100111
+Pattern: 100

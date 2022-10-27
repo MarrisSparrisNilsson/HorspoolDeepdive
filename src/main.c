@@ -4,9 +4,13 @@
 #include "filehandling.h"
 #include "algorithm.h"
 
-#define STRING_SIZE 30
+#define STRING_SIZE 100
 
 static void displayMenu();
+// static void displayStringComps(char string[], char pattern[], int tShift);
+
+static void displayStringCompsBF(char string[], char pattern[], int tShift);
+static void displayStringCompsHP(char string[], char pattern[], int tShift);
 
 int main(int argc, char const *argv[]) {
 
@@ -72,6 +76,12 @@ int main(int argc, char const *argv[]) {
                 strcpy(string, "ETKMINSUVWXOOTM");
                 strcpy(pattern, "VWXOOTM");
             break;
+            case 11:
+                strcpy(string, "A_simple_example_can_demonstrate_that_the_worst-case");
+                strcpy(pattern, "ample");
+            break;
+
+            
             case 15: 
                 printf("\nEnter a string: ");
                 scanf("%s", string);
@@ -88,6 +98,8 @@ int main(int argc, char const *argv[]) {
             "\n---------------------"
         );
         matchIndex = bruteForceMatching(pattern, string, &bFOP);
+        displayStringCompsBF(string, pattern, matchIndex);
+
         puts("---------------------");
         
         // Horspool
@@ -95,8 +107,17 @@ int main(int argc, char const *argv[]) {
             "\nHorspool:"
             "\n---------------------"
         );
-        horspoolMatching(pattern, string, &hOP);
+
+        matchIndex = horspoolMatching(pattern, string, &hOP);
+        int m = strlen(pattern);
+        int tShift = matchIndex - m + 1;
+        displayStringCompsHP(string, pattern, matchIndex);
+
+
+
         puts("---------------------");
+
+
         if (matchIndex == -1) printf("** Pattern %s could not be found in %s **\n", pattern, string);
         else printf("\n-- The pattern %s was found at index %d of %s --\n", pattern, matchIndex, string);
 
@@ -120,15 +141,40 @@ static void displayMenu() {
         "8: 11111111111111111101 - 0\n"
         "9: 11111111111111111101 - 01\n"
         "10: ETKMINSUVWXOOTM - VMXOOTM\n"
+        "11: A_simple_example_can_demonstrate_that_the_worst-case - ample\n"
 
         "10: 11111111111111111101 - 01\n"
         "11: YELLOW - YELLOW\n"
-        "11: BELLOW - YELLOW\n"
         "3: 100011110110101101010011011101 - 100011110110101101010011011101\n" // LITE VARIATION, LÅNGT
         "15: Custom Choice\n"
         "0: Exit\n"
     );
 }
 
-// Pattern : pattern
-// Text : String
+static void displayStringCompsBF(char string[], char pattern[], int tShift) {
+    int m = strlen(pattern);
+    // int n = strlen(string) - m;
+
+    for (size_t i = 0; i < tShift; i++)
+    {
+        printf("\n%s\n", string);
+        for (size_t j = 0; j < i; j++) {
+            printf(" ");
+        }
+        printf("%s\n", pattern);
+    }
+}
+
+static void displayStringCompsHP(char string[], char pattern[], int tShift) {
+    int m = strlen(pattern);
+    // int n = strlen(string) - m;
+
+    for (size_t i = 0; i < tShift; i++)
+    {
+        printf("\n%s\n", string);
+        for (size_t j = 0; j < i - m + 1; j++) {
+            printf(" ");
+        }
+        printf("%s\n", pattern);
+    }
+}
