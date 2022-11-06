@@ -1,31 +1,27 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "filehandling.h"
 #include "algorithm.h"
 
 #define STRING_SIZE 100
+#define SIZE 40
 
 static void displayMenu();
-// static void displayStringComps(char string[], char pattern[], int tShift);
-
-static void displayStringCompsBF(char string[], char pattern[], int tShift);
-static void displayStringCompsHP(char string[], char pattern[], int tShift);
 
 int main(int argc, char const *argv[]) {
 
-    // String : JIM_SAW_ME_IN_A_BARBERSHOP
-    // Pattern : BARBER
+    char avg_input[TEXT_SIZE];
+    char worst_input[TEXT_SIZE];
+    readInputFile(avg_input, 1);
 
+    size_t avg_input_size = strlen(avg_input);
+    size_t worst_input_size = 0;
     char string[STRING_SIZE], pattern[STRING_SIZE];
+
     int option, test;
 
     size_t bFOP, hOP; // Critical operation counters for both algorithms
-    int matchIndex;
+    int bfIndex, hpIndex = -1;
 
     while (1) {
-        // 101010101110111010011
-        // 1010111011
 
         bFOP = 0, hOP = 0;
         
@@ -37,91 +33,189 @@ int main(int argc, char const *argv[]) {
 
         switch (option) {
             case 1:
-                strcpy(string, "Horspool");
-                strcpy(pattern, "pool");
-            break;
-            case 2:
                 strcpy(string, "1010100111");
                 strcpy(pattern, "100");
             break;
-            case 3:
+            case 2:
                 strcpy(string, "10001111011010110101001101110");
                 strcpy(pattern, "00110");
             break;
-            case 4:
+            case 3:
                 strcpy(string, "ETKMINSUVWXOOTM");
                 strcpy(pattern, "VWX");
             break;
-            case 5:
+            case 4:
                 strcpy(string, "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
                 strcpy(pattern, "VWX");
             break;
-            case 6:
+            case 5:
                 strcpy(string, "ALKSDJIFEBEOIHSAWQNOIJASFH");
                 strcpy(pattern, "HELLO");
             break;
-            case 7:
+            case 6:
                 strcpy(string, "GEORGE_HAS_A_YELLOW_HAT");
                 strcpy(pattern, "YELLOW");
             break;
+            case 7:
+                fflush(stdin);
+                printf("\nEnter a pattern to search for: ");
+                gets(pattern);
+
+                bFOP = 0, hOP = 0;
+
+                // Brute-force
+                printAverageCaseHeader(avg_input_size, 1, option);
+                bfIndex = bruteForceMatching(pattern, avg_input, &bFOP);
+
+                printResult(pattern, bfIndex, bFOP);
+                printSummary(bFOP);
+
+                // Horspool
+                printAverageCaseHeader(avg_input_size, 2, option);
+                hpIndex = horspoolMatching(pattern, avg_input, &hOP);
+
+                printResult(pattern, hpIndex, hOP);
+                printSummary(hOP);
+
+            break;
             case 8:
-                strcpy(string, "11111111111111111101");
-                strcpy(pattern, "0");
+                char *patterns[SIZE] = {
+                    "assumenda",
+                    "Nesciunt",
+                    "praesentium",
+                    "est",
+                    "pariatur",
+                    "recusandae",
+                    "provident",
+                    "perferendis",
+                    "unde",
+                    "Minima",
+                    "adipisci",
+                    "deleniti",
+                    "soluta",
+                    "labore",
+                    "mollitia",
+                    "Eos",
+                    "hic",
+                    "reprehenderit",
+                    "Doloribus",
+                    "ipsum",
+                    "Officiis",
+                    "sapiente",
+                    "veniam",
+                    "Atque",
+                    "molestiae",
+                    "fuga",
+                    "asperiores",
+                    "consectetur",
+                    "fugiat",
+                    "iusto",
+                    "deserunt",
+                    "necessitatibus",
+                    "impedit",
+                    "dolor",
+                    "Porro",
+                    "et",
+                    "quis",
+                    "voluptas",
+                    "Error",
+                    "Dignissimos",
+                };
+                
+                // Brute-force
+                printAverageCaseHeader(avg_input_size, 1, option);
+                size_t i = 0;
+                size_t totOP = 0;
+
+                for (; i < SIZE; i++)
+                {
+                    bFOP = 0;
+                    strcpy(pattern, patterns[i]);
+
+                    bfIndex = bruteForceMatching(pattern, avg_input, &bFOP);
+                    totOP += bFOP;
+
+                    printResult(pattern, bfIndex, bFOP);
+                }
+                printSummary(totOP/SIZE);
+
+                // Horspool
+                totOP = 0;
+                printAverageCaseHeader(avg_input_size, 2, option);
+                for (i = 0; i < SIZE; i++)
+                {
+                    hOP = 0;
+                    strcpy(pattern, patterns[i]);
+
+                    hpIndex = horspoolMatching(pattern, avg_input, &hOP);
+                    totOP += hOP;
+
+                    printResult(pattern, hpIndex, hOP);
+                }
+                printSummary(totOP/SIZE);
+
             break;
             case 9:
-                strcpy(string, "11111111111111111101");
-                strcpy(pattern, "01");
+                bFOP = 0, hOP = 0;
+
+                // Brute-force
+                readInputFile(worst_input, 2);
+                worst_input_size = strlen(worst_input);
+
+                strcpy(pattern, "OOA");
+                printWorstCaseHeader(worst_input_size, pattern, 1, option);
+                bfIndex = bruteForceMatching(pattern, worst_input, &bFOP);
+
+                printResult(pattern, bfIndex, bFOP);
+                printSummary(bFOP);
+
+                strcpy(worst_input, "");
+
+                // Horspool
+                readInputFile(worst_input, 3);
+                worst_input_size = strlen(worst_input);
+                strcpy(pattern, "AOO");
+                printWorstCaseHeader(worst_input_size, pattern, 2, option);
+                hpIndex = horspoolMatching(pattern, worst_input, &hOP);
+
+                printResult(pattern, hpIndex, hOP);
+                printSummary(hOP);
             break;
             case 10:
-                strcpy(string, "ETKMINSUVWXOOTM");
-                strcpy(pattern, "VWXOOTM");
-            break;
-            case 11:
-                strcpy(string, "A_simple_example_can_demonstrate_that_the_worst-case");
-                strcpy(pattern, "ample");
-            break;
-
-            
-            case 15: 
+                fflush(stdin);
                 printf("\nEnter a string: ");
-                scanf("%s", string);
+                gets(string);
 
                 printf("Enter a pattern to search for: ");
-                scanf("%s", pattern);
+                gets(pattern);
             break;
             case 0: exit(-1); break;
             default: puts("Invalid input, please try again."); break;
         }
-        printHeader(string, pattern);
-        printf(
-            "\nBrute-force:"
-            "\n---------------------"
-        );
-        matchIndex = bruteForceMatching(pattern, string, &bFOP);
-        displayStringCompsBF(string, pattern, matchIndex);
 
-        puts("---------------------");
-        
-        // Horspool
-         printf(
-            "\nHorspool:"
-            "\n---------------------"
-        );
+        if (option < 7 && option > 0)
+        {
+            printHeader(strlen(string), string, pattern, option);
+            printf(
+                "\nBrute-force:"
+                "\n---------------------"
+            );
+            bfIndex = bruteForceMatching(pattern, string, &bFOP);
+            puts("---------------------");
+            
+            // Horspool
+            printf(
+                "\nHorspool:"
+                "\n---------------------"
+            );
+            hpIndex = horspoolMatching(pattern, string, &hOP);
+            puts("---------------------");
 
-        matchIndex = horspoolMatching(pattern, string, &hOP);
-        int m = strlen(pattern);
-        int tShift = matchIndex - m + 1;
-        displayStringCompsHP(string, pattern, matchIndex);
+            if (hpIndex == -1) printf("\n** Pattern '%s' could not be found in %s **\n", pattern, string);
+            else printf("\n-- The pattern '%s' was found at index %d of %s --\n", pattern, hpIndex, string);
 
-
-
-        puts("---------------------");
-
-
-        if (matchIndex == -1) printf("** Pattern %s could not be found in %s **\n", pattern, string);
-        else printf("\n-- The pattern %s was found at index %d of %s --\n", pattern, matchIndex, string);
-
-        writeResultToFile(bFOP, hOP);
+            writeResultToFile(bFOP, hOP);
+        }
     }
 
     return 0;
@@ -131,50 +225,16 @@ static void displayMenu() {
     printf(
         // KOM PÅ TEST MED SAMMA STRÄNG MEN OLIKA LÄNGD PÅ PATTERN!
         "\nChoose test:\n"
-        "1: Horspool - pool\n"
-        "2: 1010100111 - 100\n" // LITE VARIATION, KORT
-        "3: 100011110110101101010011011101 - 00110\n" // LITE VARIATION, LÅNGT
-        "4: ETKMINSUVWXOOTM - VWX\n" // VARIATION, KORT
-        "5: ABCDEFGHIJKLMNOPQRSTUVWXYZ - VWX\n" // VARIATION, LÅNGT
-        "6: ALKSDJIFEBEOIHSAWQNOIJASFH - HELLO\n" // INGEN MATCHNING
-        "7: GEORGE_HAS_A_YELLOW_HAT - YELLOW\n"
-        "8: 11111111111111111101 - 0\n"
-        "9: 11111111111111111101 - 01\n"
-        "10: ETKMINSUVWXOOTM - VMXOOTM\n"
-        "11: A_simple_example_can_demonstrate_that_the_worst-case - ample\n"
-
-        "10: 11111111111111111101 - 01\n"
-        "11: YELLOW - YELLOW\n"
-        "3: 100011110110101101010011011101 - 100011110110101101010011011101\n" // LITE VARIATION, LÅNGT
-        "15: Custom Choice\n"
+        "1: 1010100111 - 100\n" // LITE VARIATION, KORT
+        "2: 100011110110101101010011011101 - 00110\n" // LITE VARIATION, LÄNGRE
+        "3: ETKMINSUVWXOOTM - VWX\n" // VARIATION, KORT
+        "4: ABCDEFGHIJKLMNOPQRSTUVWXYZ - VWX\n" // VARIATION, LÄNGRE
+        "5: ALKSDJIFEBEOIHSAWQNOIJASFH - HELLO (NO MATCH)\n" // INGEN MATCHNING
+        "6: GEORGE_HAS_A_YELLOW_HAT - YELLOW\n"
+        "7: Custom AVERAGE CASE\n"
+        "8: AVERAGE CASE\n"
+        "9: WORST CASE\n"
+        "10: Custom input\n"
         "0: Exit\n"
     );
-}
-
-static void displayStringCompsBF(char string[], char pattern[], int tShift) {
-    int m = strlen(pattern);
-    // int n = strlen(string) - m;
-
-    for (size_t i = 0; i < tShift; i++)
-    {
-        printf("\n%s\n", string);
-        for (size_t j = 0; j < i; j++) {
-            printf(" ");
-        }
-        printf("%s\n", pattern);
-    }
-}
-
-static void displayStringCompsHP(char string[], char pattern[], int tShift) {
-    int m = strlen(pattern);
-    // int n = strlen(string) - m;
-
-    for (size_t i = 0; i < tShift; i++)
-    {
-        printf("\n%s\n", string);
-        for (size_t j = 0; j < i - m + 1; j++) {
-            printf(" ");
-        }
-        printf("%s\n", pattern);
-    }
 }

@@ -1,208 +1,152 @@
-String: Horspool
-Pattern: pool
+Brute-force (Average case)
+Input size: 3919
+Test: 7
+Pattern || Found at index || Critical operations
+------------------------------------------------
+            Horspool ||   -1 || 3912
+------------------------------------------------
+Average critical operations: 3912
 
-Critical operations:
-Brute-force: 9
-Horspool: 6
+======================================================
+======================================================
 
-==================================
-==================================
+Horspool (Average case)
+Input size: 3919
+Test: 7
+Pattern || Found at index || Critical operations
+------------------------------------------------
+            Horspool ||   -1 || 608
+------------------------------------------------
+Average critical operations: 608
 
-String: 1010100111
-Pattern: 100
+======================================================
+======================================================
 
-Critical operations:
-Brute-force: 12
-Horspool: 6
+Brute-force (Average case)
+Input size: 3919
+Test: 8
+Pattern || Found at index || Critical operations
+------------------------------------------------
+           assumenda ||   99 || 114
+            Nesciunt ||  639 || 649
+         praesentium ||  193 || 209
+                 est ||  213 || 242
+            pariatur || 1000 || 1035
+          recusandae ||  153 || 172
+           provident || 1908 || 1973
+         perferendis || 2691 || 2812
+                unde || 1091 || 1174
+              Minima || 3504 || 3513
+            adipisci || 2703 || 2915
+            deleniti || 1281 || 1339
+              soluta ||  909 || 980
+              labore ||  950 || 985
+            mollitia ||  285 || 311
+                 Eos ||  221 || 226
+                 hic || 1190 || 1200
+       reprehenderit ||  607 || 648
+           Doloribus || 1775 || 1786
+               ipsum ||    6 || 12
+            Officiis || 3672 || 3683
+            sapiente ||  252 || 286
+              veniam ||  139 || 146
+               Atque || 3185 || 3193
+           molestiae || 3775 || 3959
+                fuga || 1663 || 1687
+          asperiores ||  122 || 143
+         consectetur ||   28 || 40
+              fugiat ||  561 || 576
+               iusto || 1154 || 1276
+            deserunt ||   90 || 102
+      necessitatibus ||  862 || 919
+             impedit || 1017 || 1129
+               dolor ||   13 || 19
+               Porro || 2236 || 2242
+                  et ||   25 || 29
+                quis || 1570 || 1623
+            voluptas || 2990 || 3096
+               Error ||  856 || 865
+         Dignissimos ||  982 || 994
+------------------------------------------------
+Average critical operations: 1207
 
-==================================
-==================================
+======================================================
+======================================================
 
-String: 10001111011010110101001101110
-Pattern: 00110
+Horspool (Average case)
+Input size: 3919
+Test: 8
+Pattern || Found at index || Critical operations
+------------------------------------------------
+           assumenda ||   99 || 28
+            Nesciunt ||  639 || 126
+         praesentium ||  193 || 42
+                 est ||  213 || 86
+            pariatur || 1000 || 171
+          recusandae ||  153 || 37
+           provident || 1908 || 310
+         perferendis || 2691 || 352
+                unde || 1091 || 325
+              Minima || 3504 || 745
+            adipisci || 2703 || 456
+            deleniti || 1281 || 249
+              soluta ||  909 || 197
+              labore ||  950 || 209
+            mollitia ||  285 || 54
+                 Eos ||  221 || 87
+                 hic || 1190 || 445
+       reprehenderit ||  607 || 82
+           Doloribus || 1775 || 301
+               ipsum ||    6 || 9
+            Officiis || 3672 || 597
+            sapiente ||  252 || 60
+              veniam ||  139 || 38
+               Atque || 3185 || 789
+           molestiae || 3775 || 653
+                fuga || 1663 || 468
+          asperiores ||  122 || 27
+         consectetur ||   28 || 17
+              fugiat ||  561 || 131
+               iusto || 1154 || 283
+            deserunt ||   90 || 25
+      necessitatibus ||  862 || 119
+             impedit || 1017 || 216
+               dolor ||   13 || 10
+               Porro || 2236 || 520
+                  et ||   25 || 16
+                quis || 1570 || 482
+            voluptas || 2990 || 524
+               Error ||  856 || 222
+         Dignissimos ||  982 || 130
+------------------------------------------------
+Average critical operations: 240
 
-Critical operations:
-Brute-force: 38
-Horspool: 31
+======================================================
+======================================================
 
-==================================
-==================================
+Brute-force (Worst case)
+Input size: 3879
+Test: 9
+Pattern: OOA
+Critical operations || Found at index
+------------------------------------------------
+                 OOA || 3876 || 11515
+------------------------------------------------
+Average critical operations: 11515
 
-String: ETKMINSUVWXOOTM
-Pattern: VWX
+======================================================
+======================================================
 
-Critical operations:
-Brute-force: 12
-Horspool: 7
+Horspool (Worst case)
+Input size: 3879
+Test: 9
+Pattern: AOO
+Critical operations || Found at index
+------------------------------------------------
+                 AOO || 3876 || 11315
+------------------------------------------------
+Average critical operations: 11315
 
-==================================
-==================================
+======================================================
+======================================================
 
-String: ABCDEFGHIJKLMNOPQRSTUVWXYZ
-Pattern: VWX
-
-Critical operations:
-Brute-force: 25
-Horspool: 11
-
-==================================
-==================================
-
-String: ALKSDJIFEBEOIHSAWQNOIJASFH
-Pattern: HELLO
-
-Critical operations:
-Brute-force: 28
-Horspool: 6
-
-==================================
-==================================
-
-String: GEORGE_HAS_A_YELLOW_HAT
-Pattern: YELLOW
-
-Critical operations:
-Brute-force: 20
-Horspool: 11
-
-==================================
-==================================
-
-String: 11111111111111111101
-Pattern: 0
-
-Critical operations:
-Brute-force: 20
-Horspool: 20
-
-==================================
-==================================
-
-String: 11111111111111111101
-Pattern: 01
-
-Critical operations:
-Brute-force: 21
-Horspool: 21
-
-==================================
-==================================
-
-String: ETKMINSUVWXOOTM
-Pattern: VWX
-
-Critical operations:
-Brute-force: 12
-Horspool: 7
-
-==================================
-==================================
-
-String: ETKMINSUVWXOOTM
-Pattern: VWXOOTM
-
-Critical operations:
-Brute-force: 16
-Horspool: 10
-
-==================================
-==================================
-
-String: GEORGE_HAS_A_YELLOW_HAT
-Pattern: YELLOW
-
-Critical operations:
-Brute-force: 20
-Horspool: 11
-
-==================================
-==================================
-
-String: GEORGE_HAS_A_YELLOW_HAT
-Pattern: YELLOW
-
-Critical operations:
-Brute-force: 20
-Horspool: 11
-
-==================================
-==================================
-
-String: A_simple_example_can_demonstrate_that_the_worst-case
-Pattern: ample
-
-Critical operations:
-Brute-force: 17
-Horspool: 13
-
-==================================
-==================================
-
-String: GEORGE_HAS_A_YELLOW_HAT
-Pattern: YELLOW
-String: GEORGE_HAS_A_YELLOW_HAT
-Pattern: YELLOW
-String: Horspool
-Pattern: pool
-
-Critical operations:
-Brute-force: 9
-Horspool: 6
-
-==================================
-==================================
-
-String: Horspool
-Pattern: Horspoop
-
-Critical operations:
-Brute-force: 15
-Horspool: 1
-
-==================================
-==================================
-
-String: Horspool
-Pattern: Horspoop
-
-Critical operations:
-Brute-force: 0
-Horspool: 1
-
-==================================
-==================================
-
-String: GEORGE_HAS_A_YELLOW_HAT
-Pattern: YELLOW
-
-Critical operations:
-Brute-force: 20
-Horspool: 3
-
-==================================
-==================================
-
-String: A_simple_example_can_demonstrate_that_the_worst-case
-Pattern: ample
-
-Critical operations:
-Brute-force: 17
-Horspool: 13
-
-==================================
-==================================
-
-String: 1010100111
-Pattern: 100
-
-Critical operations:
-Brute-force: 12
-Horspool: 6
-
-==================================
-==================================
-
-String: GEORGE_HAS_A_YELLOW_HAT
-Pattern: YELLOW
-String: 1010100111
-Pattern: 100

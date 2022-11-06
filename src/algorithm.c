@@ -1,47 +1,32 @@
 #include "algorithm.h"
 
-// static void displayStringComps(char string[], char pattern[], int tShift);
+static void displayStringCompsBF(char string[], char pattern[], int tShift);
+static void displayStringCompsHP(char string[], char pattern[], int tShift);
 
 int bruteForceMatching(char pattern[], char string[], size_t *bFOP) {
 
-    int patternLen = strlen(pattern);
-    int stringLen = strlen(string) - patternLen;
-    int matchingChar;
-
-    // (*bFOP)++;
-    printf("\n%s\n", string);
-    printf("%s\n", pattern);
+    int m = strlen(pattern);
+    int n = strlen(string);
     
-    for (int i = 0; i < stringLen; i++) { // Loop until it reaches the end of the string
-        matchingChar = 0;
-        int j = i;
-        int k = 0;
+
+    for (int i = 0; i <= n - m; i++) { // Loop until it reaches the end of the string
+        if (n < 100)
+            displayStringCompsBF(string, pattern, i);
+        int j = 0;
         (*bFOP)++;
-        while (k < patternLen && pattern[k] == string[j]) { // Loop pattern characters
-            // if (pattern[k] == string[j])
-            matchingChar++; // Match not found
+        // Loop pattern characters while matching
+        while (j < m && pattern[j] == string[i + j]) { // *Critical operation*
+            j = j + 1;
             (*bFOP)++;
-            j++;
-            k++;
         }
         
-        if (matchingChar == patternLen)
+        if (j == m) // Match was found
             return i;
-        // printf("\n%s\n", string);
-        // for (size_t c = 0; c < i; c++) {
-        //     printf(" ");
-        // }
-        // printf("%s\n", pattern);
     }
     return -1;
 }
 
-// ShiftTable(P[0..m - 1], int asciiTable[]) {
 void shiftTable(int *table, char pattern[]) {
-
-    // String : JIM_SAW_ME_IN_A_BARBERSHOP
-    // Pattern : BARBER
-
     // Fills the shift table used by Horspool’s and Boyer-Moore algorithms
     // Input: Pattern P[0..m − 1] and an alphabet of possible characters
     // Output: Table[0..size − 1] indexed by the alphabet’s characters and
@@ -49,9 +34,7 @@ void shiftTable(int *table, char pattern[]) {
     int m = strlen(pattern);
     for (size_t i = 0; i <= ASCII_SIZE - 1; i++)
         table[i] = m;
-    if (m == 1) // When pattern only constist of one character
-        table[(int) pattern[0]] = 0;
-    else 
+    if (m != 1) // When pattern only constist of one character 
         for (size_t j = 0; j <= m - 2; j++)
             table[(int) pattern[j]] = m - 1 - j;
 }
@@ -64,38 +47,43 @@ int horspoolMatching(char pattern[], char string[], size_t *hOP) {
     // or −1 if there are no matches
     int table[ASCII_SIZE];
     int m = strlen(pattern);
-    int n = strlen(string) - m;
+    int n = strlen(string);
     int k; // Character match counter
 
-    // P[0..m − 1]
     shiftTable(table, pattern); // generate Table of shifts
-    int i = m - 1; // position of the pattern’s right end
-    printf("\n%s\n", string);
-    printf("%s\n", pattern);
+    int i = m - 1; // index of the pattern’s right end
+
     while (i <= n - 1) { // Loop until it reaches the end of the string
+        if (n < 100)
+            displayStringCompsHP(string, pattern, i);
         k = 0; // number of matched characters
         (*hOP)++;
-        // Loop pattern characters
-        while (k <= m - 1 && pattern[m - 1 - k] == string[i - k]) { 
+        // Loop pattern characters while matching
+        while (k <= m - 1 && pattern[m - 1 - k] == string[i - k]) { // *Critical operation*
             k = k + 1;
             (*hOP)++;
         }
-        // If the number of character matches
-        // is the same as the pattern length
+        // If match was found
         if (k == m) 
             return i - m + 1; // Index where a match was found
         else i += table[string[i]];
-        
-        // displayStringComps(string, pattern, i);
     }
     return -1;
 }
 
-// static void displayStringComps(char string[], char pattern[], int tShift) {
-//     printf("\n%s\n", string);
-//     int m = strlen(pattern);
-//     for (size_t i = 0; i < tShift - m + 1; i++) {
-//         printf(" ");
-//     }
-//     printf("%s\n", pattern);
-// }
+static void displayStringCompsBF(char string[], char pattern[], int tShift) {
+    printf("\n%s\n", string);
+    for (size_t c = 0; c < tShift; c++) {
+        printf(" ");
+    }
+    printf("%s\n", pattern);
+}
+
+static void displayStringCompsHP(char string[], char pattern[], int tShift) {
+    printf("\n%s\n", string);
+    int m = strlen(pattern);
+    for (size_t i = 0; i < tShift - m + 1; i++) {
+        printf(" ");
+    }
+    printf("%s\n", pattern);
+}
